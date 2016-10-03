@@ -14,9 +14,8 @@ class Character(object):
         self.speed_x = 0
         self.speed_y = -5
 
-    def update(self, width, height):
-        self.x += self.speed_x
-        self.y += self.speed_y
+
+
         # if self.x  > width:
         #     self.speed_x = -10
         # if self.y > height:
@@ -30,8 +29,11 @@ class Monster(Character):
     def __init__(self, x, y):
         self.x = x
         self.y = y
-        self.speed_x = 5
-        self.speed_y = 0
+        self.speed_x = 0
+        self.speed_y = 1
+    def update(self, x, y):
+        self.x += self.speed_x
+        self.y += self.speed_y
 
 class Hero(Character):
     def __init__(self, x, y):
@@ -39,6 +41,15 @@ class Hero(Character):
         self.y = y
         self.speed_x = 0
         self.speed_y = 0
+
+    def update(self, width, height):
+        self.x += self.speed_x
+        self.y += self.speed_y
+        if self.x > 450 or self.x < 30:
+            self.speed_x = 0
+        if self.y > 425 or self.y < 30:
+            self.speed_y = 0
+
 
 
 
@@ -53,7 +64,7 @@ def main():
 
     # create screen
     screen = pygame.display.set_mode((width, height))
-    monster = Monster(340, 30)
+    monster = Monster(240, 30)
     hero = Hero(240, 240)
     change_dir_countdown = 120
     # # set window caption
@@ -109,6 +120,7 @@ def main():
                 stop_game = True
 
         monster.update(width, height)
+        hero.update(width, height)
         # monster.x += 5
         if monster.x >= width:
             monster.x = 0
@@ -152,7 +164,7 @@ def main():
 
         screen.blit(monster_img, (monster.x, monster.y))
 
-        screen.blit(hero_img, (240, 240))
+        screen.blit(hero_img, (hero.x, hero.y))
         # fill background color
         # screen.fill(blue_color)
 
