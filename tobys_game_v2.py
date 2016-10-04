@@ -1,4 +1,3 @@
-
 import pygame
 import time
 import random
@@ -69,8 +68,8 @@ class Monster(Character):
     def __init__(self):
         self.x = 100
         self.y = 100
-        self.speed_x = 0
-        self.speed_y = 1
+        self.speed_x = 5
+        self.speed_y = 0
         self.image = pygame.image.load('images/monster.png')
         self.direction_change_countdown = 120
 
@@ -96,18 +95,18 @@ class Monster(Character):
             self.change_direction()
 
     def change_direction(self):
-        ran = random.randint(0, 3)
-        if ran == 0:
+        num = random.randint(0, 3)
+        if num == 0:
             self.speed_x = 0
-            self.speed_y = -random.randint(0, 9)
-        elif ran == 1:
-            self.speed_x = random.randint(0, 9)
+            self.speed_y = -5
+        elif num == 1:
+            self.speed_x = 5
             self.speed_y = 0
-        elif ran == 2:
+        elif num == 2:
             self.speed_x = 0
-            self.speed_y = random.randint(0, 9)
+            self.speed_y = 5
         else:
-            self.speed_x = -random.randint(0, 9)
+            self.speed_x = -5
             self.speed_y = 0
 
     def respawn(self, width, height):
@@ -137,7 +136,7 @@ def main():
     ################################
     pygame.mixer.init()
     background_image = pygame.image.load('images/background.png')
-    win_sound = pygame.mixer.Sound('sounds/cowabunga.wav')
+    win_sound = pygame.mixer.Sound('sounds/win.wav')
 
     monster = Monster()
     hero = Hero()
